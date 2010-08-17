@@ -1,0 +1,37 @@
+h1. BlipTV API
+
+This is a *"Blip.TV API":blip_api_url PHP5 Class* that is used to access and retrieve
+data from the Blip.TV APIs.
+It does *not* support authentication, which is used with the "REST API":rest_api_url 
+to upload videos and/or remove them.
+I recommend the "Blip-PHP Project":blip-php if you need those options.
+
+This repository contains the "Services_JSON":http://pear.php.net/pepr/pepr-proposal-show.php?id=198
+class, which is licensed under the "BSD License":http://www.opensource.org/licenses/bsd-license.php ,
+and used to provide compatibility for PHP5 < 5.2.0.
+It also contains the *BlipTV API* class which is licensed under the "MIT License":mit_license .
+
+h2. Usage
+
+*Requires PHP5 >= 5.0.0*
+
+Documentation and usage instructions/examples can be found at the project's "Wiki Page":Wiki_Page .
+
+h2. Feedback
+
+*Report An Issue/Bug*
+Please report issues on the project's "GitHub Issues":issues page.
+Known issues with Blip.TV's API are noted in the code's comments, but if you find
+something I missed, please report them so I can fix/note them.
+
+*Comments/Suggestions*
+If you'd like to leave some general feedback, please visit my website "http://amereservant.com":http://amereservant.com
+and leave me a message.  A better commenting system will be implimented at a later date.
+
+[issues]http://github.com/amereservant/BlipTV-API/issues
+[feedback_link]http://amereservant.com/
+[Wiki_Page]http://wiki.github.com/amereservant/BlipTV-API/
+[blip_api_url]http://wiki.blip.tv/index.php/Blip.tv_API
+[blip-php]http://code.google.com/p/blip-php/
+[mit_license]http://creativecommons.org/licenses/MIT/
+
