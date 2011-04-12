@@ -130,7 +130,8 @@ class BlipTV_API
     public $version = 3; // 2 or 3
     
     // Pagination - (For JSON with Versioning 3 only!)
-    public $pagination;
+    /* !!! AS OF 04/12/2011, RECENT CHANGES TO THEIR API HAVE REMOVED PAGINATION FROM THE RETURN DATA !!! */
+    public $pagination = NULL;
     
     // API Section - Depending on which API, it will vary.
     public $section;
@@ -338,9 +339,22 @@ class BlipTV_API
         if( $data )
         {
             // Correct JSON data format
-            $data = str_replace( "blip_ws_results([{", "[{", $data );
-            $data = str_replace( "]);", "]", $data );
-
+            $data = str_replace( "blip_ws_results([[{", "[{", $data, $replaced_count );
+            if($replaced_count > 0) {
+                $data = str_replace( "]);", "", $data );
+            }
+            else
+            {
+                $data = str_replace( "blip_ws_results([{", "[{", $data, $replaced_count );
+                $data = str_replace( "]);", "]", $data );
+            }
+            // Check if BlipTV API format has been changed since they have done so without any notification.
+            if($replaced_count < 1) {
+                $this->error = 'API data format didn\'t match previous formats.  This may cause application failure!';
+                trigger_error($this->error);
+                return false;
+            }
+            
             // Correct improperly escaped single quotes
             $data = str_replace( "\\'", "\\\\'", $data);
             
@@ -362,7 +376,10 @@ class BlipTV_API
                     }
                     
                 }
-                
+                /*****
+                 *  As of 04/12/2011, updates BlipTV recently made to their API 
+                 * have removed pagination from the returned data.
+                 *
                 // Parse pagination values - (improper json format)
                 $part2 = trim(str_replace(array('[', ']', '{', '}'), '', substr( $data, strrpos($data, '],')+2)));
                 $part2 = explode(',', $part2);
@@ -371,8 +388,8 @@ class BlipTV_API
                 foreach($part2 as $piece) {
                     $newpart[trim($piece[0])] = trim($piece[1]);
                 }
-                
-                $this->pagination = $newpart;
+                */
+                $this->pagination = NULL;//$newpart;
             }
             else
             {
@@ -435,7 +452,7 @@ class BlipTV_API
     * @return   mixed       String if {@link $data_type} is 'rss' or 'api', else
     *                       array if 'json'.  False on failure.
     * @access   protected
-    * @since    0.0.1
+    * @since    0.0.1have removed
     */
     protected function fetch_data()
     {
@@ -555,6 +572,7 @@ echo '<h2>Search Results</h2>';
 echo 'URL: '. $blip->request_url .'<br />';
 echo '<pre>'. htmlentities(print_r($data, true)) .'</pre>';
 echo '<strong>Pagination</strong><br />';
+echo '<strong style="color:red">Disabled as of 04/12/2011 because of BlipTV API updates.</strong>';
 echo '<pre>'. print_r($blip->pagination, true) .'</pre>';
 
 $data = $blip->get_licenses();
@@ -566,4 +584,4 @@ $data = $blip->get_video_info( 4011705 );
 echo '<h2>Video Item\'s Details</h2>';
 echo 'URL: '. $blip->request_url .'<br />';
 highlight_string("<?php\n ".print_r($data, true));
-**/
+*/
