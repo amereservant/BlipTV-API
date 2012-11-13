@@ -32,6 +32,6 @@ and leave me a message.  A better commenting system will be implimented at a lat
 [feedback_link]http://amereservant.com/
 [Wiki_Page]http://wiki.github.com/amereservant/BlipTV-API/
 [blip_api_url]http://wiki.blip.tv/index.php/Blip.tv_API
-[blip-php]http://code.google.com/p/blip-php/
+[blip-php]https://github.com/AlmogBaku/blip-php
 [mit_license]http://creativecommons.org/licenses/MIT/
 
